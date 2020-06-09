@@ -60,7 +60,7 @@ public class MainController {
     private void delete(){
         int selectedIndex = listView.getSelectionModel().getSelectedIndex(); //index of the item selected
         if(selectedIndex != -1){
-            boolean answer = DialogBox.showConfirmation("Are you sure you want to delete " + this.instance.toWatch.get(selectedIndex), "Delete Confirmation");
+            boolean answer = DialogBox.showConfirmation("Are you sure you want to delete " + this.instance.toWatch.get(selectedIndex) + "?", "Delete Confirmation");
             if(answer){
 
                 listView.getItems().remove(selectedIndex);
