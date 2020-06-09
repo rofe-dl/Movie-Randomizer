@@ -21,13 +21,34 @@ import controller.MainController;
 
 
 /**
- * JavaFX App
+ * Takes a .txt file of movie names and picks a random 
+ * one out of it to watch and removes it from the file upon confirmation.
+ * 
+ * @author Rafidul Islam
+ * @version 0.1
+ * @since 09-06-2020
+ * 
  */
 public class App extends Application {
 
+    /**
+     * ArrayList of movie names made from the text file.
+     */
     public ArrayList<String> toWatch = new ArrayList<>();
+    
+    /**
+     * Icon
+     */
     public Image icon = new Image("/view/icon.png");
+
+    /**
+     * Loader used to load fxml files.
+     */
     public FXMLLoader loader;
+
+    /**
+     * Instance of the main controller of the program.
+     */
     public MainController controllerInstance;
 
     /**
@@ -39,7 +60,7 @@ public class App extends Application {
         Parent parent = null;
         try{
             loader = new FXMLLoader(getClass().getResource(fxmlDir));
-            parent = loader.load(); //this also runs the initialise method of the fxml's controller
+            parent = loader.load(); //this also runs the initialize method of the fxml's controller
         }catch (IOException e){
             e.printStackTrace(); //should never happen
         }
@@ -47,6 +68,9 @@ public class App extends Application {
         return parent;
     }
 
+    /**
+     * Method that runs before UI is shown
+     */
     @Override
     public void init(){
 
@@ -65,22 +89,29 @@ public class App extends Application {
         reader.close();
     }
 
+    /**
+     * UI starts here.
+     */
     @Override
     public void start(Stage stage) throws IOException {
         AnchorPane pane = (AnchorPane) loadFXML("/view/UI.fxml");
-        this.controllerInstance = loader.getController();
+        this.controllerInstance = loader.getController(); //sets global instance of main controller
 
         stage.setTitle("Movie Randomizer");
-        stage.setResizable(false);
         stage.setScene(new Scene(pane));
         stage.getIcons().add(this.icon);
+        stage.setMinHeight(478);
+        stage.setMinWidth(432);
 
         this.controllerInstance.setAppInstance(this);
-        this.controllerInstance.fillList();
+        this.controllerInstance.fillUpList();
 
         stage.show();
     }
 
+    /**
+     * Shows box to add movie to the list if needed.
+     */
     public void showAddMovie(){
         Stage stage = new Stage();
         AnchorPane pane = (AnchorPane) loadFXML("/view/AddUI.fxml");
@@ -99,11 +130,19 @@ public class App extends Application {
         stage.showAndWait();
     }
 
+    /**
+     * 
+     * @return  Returns random integer from 0 till number of movies.
+     */
     public int getRandomInt(){
         Random rand = new Random();
         return rand.nextInt(this.toWatch.size());
     }
 
+    /**
+     * Method that runs when program is closed.
+     * Movie names from arraylist is saved into the txt filet
+     */
     @Override
     public void stop() throws Exception{
         String list = "";

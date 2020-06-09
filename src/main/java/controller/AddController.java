@@ -9,8 +9,19 @@ import movierandomizer.App;
 
 public class AddController {
 
+    /**
+     * Instance of the main running app.
+     */
     App instance;
+
+    /**
+     * Instance of the main controller of the program.
+     */
     MainController controllerInstance;
+
+    /**
+     * Stage of the add movie screen, stored so stage.close() can be called here.
+     */
     Stage stage;
 
     @FXML
@@ -19,6 +30,9 @@ public class AddController {
     @FXML
     private TextField textField;
 
+    /**
+     * Movie added to listview and arraylist.
+     */
     @FXML
     private void add(){
         String movieName = textField.getText().trim();
