@@ -62,7 +62,6 @@ public class MainController {
         if(selectedIndex != -1){
             boolean answer = DialogBox.showConfirmation("Are you sure you want to delete " + this.instance.toWatch.get(selectedIndex) + "?", "Delete Confirmation");
             if(answer){
-
                 listView.getItems().remove(selectedIndex);
                 this.instance.toWatch.remove(selectedIndex);
             }
@@ -90,9 +89,14 @@ public class MainController {
     @FXML
     private void confirmRemove(){
         if(this.randomIndex != -1){
-            listView.getItems().remove(randomIndex);
-            this.instance.toWatch.remove(randomIndex);
-            this.textField.setText(null);
+            boolean answer = DialogBox.showConfirmation("Are you sure you will now watch " + this.instance.toWatch.get(randomIndex) + "?", "Watch Confirmation");
+            if(answer){
+                listView.getItems().remove(randomIndex);
+                this.instance.toWatch.remove(randomIndex);
+                this.textField.setText(null);
+            }
+        }else{
+            DialogBox.showDialog("Press Randomize! first", "Error");
         }
     }
 
