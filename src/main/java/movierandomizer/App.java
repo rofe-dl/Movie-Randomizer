@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import util.DialogBox;
 
 import java.io.IOException;
 import java.io.File;
@@ -94,19 +95,24 @@ public class App extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        AnchorPane pane = (AnchorPane) loadFXML("/view/UI.fxml");
-        this.controllerInstance = loader.getController(); //sets global instance of main controller
+        try{
 
-        stage.setTitle("Movie Randomizer");
-        stage.setScene(new Scene(pane));
-        stage.getIcons().add(this.icon);
-        stage.setMinHeight(480);
-        stage.setMinWidth(480);
+            AnchorPane pane = (AnchorPane) loadFXML("/view/UI.fxml");
+            this.controllerInstance = loader.getController(); //sets global instance of main controller
 
-        this.controllerInstance.setAppInstance(this);
-        this.controllerInstance.fillUpList();
+            stage.setTitle("Movie Randomizer");
+            stage.setScene(new Scene(pane));
+            stage.getIcons().add(this.icon);
+            stage.setMinHeight(480);
+            stage.setMinWidth(480);
 
-        stage.show();
+            this.controllerInstance.setAppInstance(this);
+            this.controllerInstance.fillUpList();
+
+            stage.show();
+        }catch (Exception e){
+            DialogBox.showError("File 'towatch.txt' not found in the same directory.", "File Not Found");
+        }
     }
 
     /**

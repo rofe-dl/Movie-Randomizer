@@ -6,6 +6,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 import movierandomizer.App;
+import util.DialogBox;
 
 public class MainController {
 
@@ -59,8 +60,14 @@ public class MainController {
     private void delete(){
         int selectedIndex = listView.getSelectionModel().getSelectedIndex(); //index of the item selected
         if(selectedIndex != -1){
-            listView.getItems().remove(selectedIndex);
-            this.instance.toWatch.remove(selectedIndex);
+            boolean answer = DialogBox.showConfirmation("Are you sure you want to delete " + this.instance.toWatch.get(selectedIndex), "Delete Confirmation");
+            if(answer){
+
+                listView.getItems().remove(selectedIndex);
+                this.instance.toWatch.remove(selectedIndex);
+            }
+        }else{
+            DialogBox.showDialog("Select a movie first", "Not Selected");
         }
     }
 
