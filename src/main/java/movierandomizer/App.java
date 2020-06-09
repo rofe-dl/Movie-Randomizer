@@ -95,24 +95,20 @@ public class App extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        try{
 
-            AnchorPane pane = (AnchorPane) loadFXML("/view/UI.fxml");
-            this.controllerInstance = loader.getController(); //sets global instance of main controller
+        AnchorPane pane = (AnchorPane) loadFXML("/view/UI.fxml");
+        this.controllerInstance = loader.getController(); //sets global instance of main controller
 
-            stage.setTitle("Movie Randomizer");
-            stage.setScene(new Scene(pane));
-            stage.getIcons().add(this.icon);
-            stage.setMinHeight(480);
-            stage.setMinWidth(480);
+        stage.setTitle("Movie Randomizer");
+        stage.setScene(new Scene(pane));
+        stage.getIcons().add(this.icon);
+        stage.setMinHeight(480);
+        stage.setMinWidth(480);
 
-            this.controllerInstance.setAppInstance(this);
-            this.controllerInstance.fillUpList();
+        this.controllerInstance.setAppInstance(this);
+        this.controllerInstance.fillUpList();
 
-            stage.show();
-        }catch (Exception e){
-            DialogBox.showError("File 'towatch.txt' not found in the same directory.", "File Not Found");
-        }
+        stage.show();
     }
 
     /**
