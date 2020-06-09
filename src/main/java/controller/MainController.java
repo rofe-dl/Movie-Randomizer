@@ -94,6 +94,7 @@ public class MainController {
                 listView.getItems().remove(randomIndex);
                 this.instance.toWatch.remove(randomIndex);
                 this.textField.setText(null);
+                this.randomIndex = -1;
             }
         }else{
             DialogBox.showDialog("Press Randomize! first", "Error");
