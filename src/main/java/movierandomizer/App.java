@@ -100,8 +100,8 @@ public class App extends Application {
         stage.setTitle("Movie Randomizer");
         stage.setScene(new Scene(pane));
         stage.getIcons().add(this.icon);
-        stage.setMinHeight(478);
-        stage.setMinWidth(432);
+        stage.setMinHeight(480);
+        stage.setMinWidth(480);
 
         this.controllerInstance.setAppInstance(this);
         this.controllerInstance.fillUpList();
