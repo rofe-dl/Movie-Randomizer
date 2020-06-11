@@ -73,12 +73,14 @@ public class App extends Application {
      * Method that runs before UI is shown
      */
     @Override
-    public void init(){
+    public void init() throws IOException{
 
         Scanner reader = null;
+        File file = new File("hotdog.txt");
+        file.createNewFile(); //will create the file if not exists, do nothing if exists
 
         try{
-           reader = new Scanner(new File("towatch.txt"));
+           reader = new Scanner(file);
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -153,7 +155,7 @@ public class App extends Application {
             list += movie + System.lineSeparator();
         }
 
-        FileWriter writer = new FileWriter(new File("towatch.txt"));
+        FileWriter writer = new FileWriter(new File("hotdog.txt"));
         writer.write(list);
 
         writer.close();
